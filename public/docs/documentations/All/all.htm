@@ -1,5 +1,5 @@
 
-  <!-- Start public/less-sample/app/app-mixins.less -->
+  <!-- Start ../../../../Desktop/less-sample/app/app-mixins.less -->
 
 <h1 id="mixin-interfaces">Mixin Interfaces</h1>
 <h2 id="-fix-float-"><code>.fix-float()</code></h2>
@@ -209,43 +209,83 @@ You can target the <code>width</code> property for example: <code>.make-fibo-for
 <span class="preprocessor">.gs</span> <span class="preprocessor">.fs</span>-<span class="number">5</span> {
   width: <span class="number">55</span>%<span class="comment">;</span>
 }</code></pre>
-<!-- End public/less-sample/app/app-mixins.less -->
+<!-- End ../../../../Desktop/less-sample/app/app-mixins.less -->
 
 
 
 
-<!-- Start ../sass-testing/functions/_low-level.scss -->
+<!-- Start ../../sassmin/functions/_low-level.scss -->
 
-<h2 id="-zerofy">ø: zerofy</h2>
-<pre><code><span class="comment">Converts</span> <span class="comment">input</span> <span class="comment">to</span> <span class="comment">zero</span> <span class="comment">or</span> <span class="comment">zero</span>[<span class="comment">unit</span>]<span class="string">.</span>
+<h2 id="-value-"><code>ø($value)</code></h2>
+<h3 id="description">Description</h3>
+<p>Converts input to zero or zero[unit]</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>$value</strong> : <em>non-string or number</em> The value to be turned to zero or zero[units]. If the input has units, it will be carried over.</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  Can be called anywhere as a function in your sass.</p>
+<h3 id="examples">Examples</h3>
+<pre><code><span class="class">.example1</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> ø(<span class="number">2</span>px) // -&gt; font-size: <span class="number">0</span>px;</span></span>
+<span class="rule">}</span></span>
 
-<span class="comment">Examples:</span> <span class="comment">ø(2)</span> <span class="literal">-</span>&gt; <span class="comment">0</span>
-                    <span class="comment">ø(2px)</span> <span class="literal">-</span>&gt; <span class="comment">0px</code></pre>
-<h2 id="-">µ</h2>
-<pre><code>Converts to one <span class="keyword">or</span> one[unit]
+<span class="class">.example2</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> ø(<span class="number">0</span>) // -&gt; font-size: <span class="number">0</span>;</span></span>
+<span class="rule">}</span></span></code></pre>
+<h2 id="-value-"><code>µ($value)</code></h2>
+<h3 id="description">Description</h3>
+<p>Converts to one or one[unit]</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>$value</strong> : <em>non-string or number</em> The value to be turned to one or one[units]. If the input has units, it will be carried over.</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  Can be called anywhere as a function in your sass.</p>
+<h3 id="examples">Examples</h3>
+<pre><code><span class="class">.example1</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> µ(<span class="number">2</span>) // -&gt; font-size: <span class="number">1</span>;</span></span>
+<span class="rule">}</span></span>
 
-Examples: µ(-<span class="number">1</span>) -&gt; <span class="number">1</span>
-                    µ(<span class="number">2</span>px) -&gt; <span class="number">2</span>px</code></pre>
-<!-- End ../sass-testing/functions/_low-level.scss -->
+<span class="class">.example2</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> µ(<span class="number">2</span>px) // -&gt; font-size: <span class="number">1</span>px;</span></span>
+<span class="rule">}</span></span></code></pre>
+<!-- End ../../sassmin/functions/_low-level.scss -->
 
 
 
 
-<!-- Start ../sass-testing/functions/_math.scss -->
+<!-- Start ../../sassmin/functions/_math.scss -->
 
-<!-- End ../sass-testing/functions/_math.scss -->
+<h2 id="-power-base-exponent-"><code>power($base, $exponent)</code></h2>
+<!-- End ../../sassmin/functions/_math.scss -->
 
 
 
 
-<!-- Start ../sass-testing/functions/_utils.scss -->
+<!-- Start ../../sassmin/functions/_utils.scss -->
 
-<h2 id="strip">strip</h2>
-<p>Stips units or stuff after the number.</p>
-<p>Example:  strip(2px) -&gt; 2
-                    strip(11%) -&gt; 11
-                    strip(2em) -&gt; 2
-                    strip(2somethingcrazy) -&gt; 2</p>
-<!-- End ../sass-testing/functions/_utils.scss -->
+<h2 id="-strip-value-"><code>strip($value)</code></h2>
+<h3 id="description">Description</h3>
+<p>Remove units or non-string elements immediately followed by numbers.</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>$value</strong> : <em>number[unit]</em> The input with or without unit to be stripped.</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  Can be called anywhere as a function in your sass. Useful when you need to strip off stuff that are immediately followed after a number.</p>
+<h3 id="examples">Examples</h3>
+<pre><code><span class="class">.example1</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="function">strip(<span class="number">2</span>)</span> // -&gt; font-size: <span class="number">2</span>;</span></span>
+<span class="rule">}</span></span>
+
+<span class="class">.example2</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="function">strip(<span class="number">2</span>px)</span> // -&gt; font-size: <span class="number">2</span>;</span></span>
+<span class="rule">}</span></span>
+
+<span class="class">.example3</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="function">strip(<span class="number">3</span>something)</span> // -&gt; font-size: <span class="number">3</span>;</span></span>
+<span class="rule">}</span></span></code></pre>
+<!-- End ../../sassmin/functions/_utils.scss -->
 
 

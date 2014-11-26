@@ -1,16 +1,40 @@
 
-  <!-- Start ../sass-testing/functions/_low-level.scss -->
+  <!-- Start ../../sassmin/functions/_low-level.scss -->
 
-<h2 id="-zerofy">ø: zerofy</h2>
-<pre><code><span class="comment">Converts</span> <span class="comment">input</span> <span class="comment">to</span> <span class="comment">zero</span> <span class="comment">or</span> <span class="comment">zero</span>[<span class="comment">unit</span>]<span class="string">.</span>
+<h2 id="-value-"><code>ø($value)</code></h2>
+<h3 id="description">Description</h3>
+<p>Converts input to zero or zero[unit]</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>$value</strong> : <em>non-string or number</em> The value to be turned to zero or zero[units]. If the input has units, it will be carried over.</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  Can be called anywhere as a function in your sass.</p>
+<h3 id="examples">Examples</h3>
+<pre><code><span class="class">.example1</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> ø(<span class="number">2</span>px) // -&gt; font-size: <span class="number">0</span>px;</span></span>
+<span class="rule">}</span></span>
 
-<span class="comment">Examples:</span> <span class="comment">ø(2)</span> <span class="literal">-</span>&gt; <span class="comment">0</span>
-                    <span class="comment">ø(2px)</span> <span class="literal">-</span>&gt; <span class="comment">0px</code></pre>
-<h2 id="-">µ</h2>
-<pre><code>Converts to one <span class="keyword">or</span> one[unit]
+<span class="class">.example2</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> ø(<span class="number">0</span>) // -&gt; font-size: <span class="number">0</span>;</span></span>
+<span class="rule">}</span></span></code></pre>
+<h2 id="-value-"><code>µ($value)</code></h2>
+<h3 id="description">Description</h3>
+<p>Converts to one or one[unit]</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>$value</strong> : <em>non-string or number</em> The value to be turned to one or one[units]. If the input has units, it will be carried over.</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  Can be called anywhere as a function in your sass.</p>
+<h3 id="examples">Examples</h3>
+<pre><code><span class="class">.example1</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> µ(<span class="number">2</span>) // -&gt; font-size: <span class="number">1</span>;</span></span>
+<span class="rule">}</span></span>
 
-Examples: µ(-<span class="number">1</span>) -&gt; <span class="number">1</span>
-                    µ(<span class="number">2</span>px) -&gt; <span class="number">2</span>px</code></pre>
-<!-- End ../sass-testing/functions/_low-level.scss -->
+<span class="class">.example2</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> µ(<span class="number">2</span>px) // -&gt; font-size: <span class="number">1</span>px;</span></span>
+<span class="rule">}</span></span></code></pre>
+<!-- End ../../sassmin/functions/_low-level.scss -->
 
 

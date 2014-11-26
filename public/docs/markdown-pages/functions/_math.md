@@ -1,6 +1,8 @@
 
 
-<!-- Start ../sass-testing/functions/_math.scss -->
+<!-- Start ../../sassmin/functions/_math.scss -->
 
-<!-- End ../sass-testing/functions/_math.scss -->
+##`power($base, $exponent)`
+
+<!-- End ../../sassmin/functions/_math.scss -->
 

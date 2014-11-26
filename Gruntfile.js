@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,                               // Enable dynamic expansion.
-            cwd: '../sass-testing',      // Src matches are relative to this path.
+            cwd: '/Users/aminmeyghani/docs_libs_projects/node/sassmin',      // Src matches are relative to this path.
             src: ["functions/**/*.scss"],               // Actual pattern(s) to match.
             dest: '<%= docsGen.docsMdOutput %>' , // Destination path prefix.
             ext: '.md'                                  // Dest filepaths will have this extension.
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
           files: [
             {
               expand: true,                               // Enable dynamic expansion.
-              cwd: 'public/less-sample',      // Src matches are relative to this path.
+              cwd: '/Users/aminmeyghani/Desktop/less-sample',      // Src matches are relative to this path.
               src: ["**/*.less"],               // Actual pattern(s) to match.
               dest: '<%= docsGen.docsMdOutput %>' , // Destination path prefix.
               ext: '.md'                                  // Dest filepaths will have this extension.
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   
   // Default task(s).
-  grunt.registerTask('default', ['docs']);
+  grunt.registerTask('default', ['docs', 'links']);
   grunt.registerTask('links', ['clean:links', 'to_html', 'replace:docs_navs']);
   grunt.registerTask('docs', ['clean', 'markdox', 'concat', 'markdown']);
   grunt.registerTask('mdDocs', ['clean:mdDocs','markdox']);

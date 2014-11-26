@@ -1,6 +1,6 @@
 
 
-<!-- Start public/less-sample/app/app-mixins.less -->
+<!-- Start ../../../../Desktop/less-sample/app/app-mixins.less -->
 
 # Mixin Interfaces #
 
@@ -249,5 +249,5 @@ You can target the `width` property for example: `.make-fibo-for(@property : wid
       width: 55%;
     }
 
-<!-- End public/less-sample/app/app-mixins.less -->
+<!-- End ../../../../Desktop/less-sample/app/app-mixins.less -->
 
