@@ -1,0 +1,29 @@
+<div class="row">
+  <h1 style="padding-left:7px;"><a href="/">DOCS</a>
+  </h1>
+  <div class="col-sm-4">
+    <div style="border-right:1px solid #e5e6e7;">
+      <ul>
+        {{#each modules}}
+        <li>
+          {{#if path}}
+          <h2>
+            <a href="{{path}}">{{title}}</a>
+          </h2>
+
+          {{/if}}
+
+          <ul>
+            {{#if children}}
+            {{&recurse children}}
+            {{/if}}
+          </ul>
+        </li>
+        {{/each}}
+      </ul>
+      
+    </div>
+
+  </div>
+  <div class="col-sm-8" ng-include="includeDoc()"></div>
+</div>

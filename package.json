@@ -21,6 +21,7 @@
     "grunt-directory-to-html": "^0.2.0",
     "grunt-markdown": "^0.6.1",
     "grunt-markdox": "^1.2.1",
+    "grunt-text-replace": "^0.4.0",
     "load-grunt-tasks": "^1.0.0"
   }
 }

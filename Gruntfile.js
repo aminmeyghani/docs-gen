@@ -84,7 +84,8 @@ module.exports = function(grunt) {
     // Cleaning things up ...
     clean: {
       htmlDocs: ["<%= docsGen.docsHtmlOutput %>/**/*.htm","<%= docsGen.docsHtmlOutput %>"],
-      mdDocs: ["<%= docsGen.docsMdOutput %>"]
+      mdDocs: ["<%= docsGen.docsMdOutput %>"],
+      links: ["public/src/routes/docs-raw.htm", "public/src/routes/docs.htm"]
     },
     // watch changes to trigger css 
     watch: {
@@ -95,13 +96,41 @@ module.exports = function(grunt) {
           nospawn: true
         }
       }
-    }
+    },
+    // to_html: {
+    //   'dest/index.html': 'public/docs/documentations/**/*.htm'
+    // }
+    to_html: {
+      links: {
+        // Target-specific file lists and/or options go here e.g.
+        options: {useFileNameAsTitle: true, templatingLanguage: "jade", template: grunt.file.read('public/src/routes/docs.jade'), rootDirectory: "public/docs"},
+        files: {'public/src/routes/docs-raw.htm': 'public/docs/documentations/**/*.htm'}
+      }
+    },
+    replace: {
+      docs_navs: {
+          src: ['public/src/routes/docs-raw.htm'],             // source files array (supports minimatch)
+          dest: 'public/src/routes/docs.htm',             // destination directory or file
+          replacements: [{
+            from: 'public/docs/documentations/',
+            to: '#/docs/'
+          },
+          {
+            from: '.htm',
+            to: ''
+          }
+          ]
+        }
+      }
+
+   
   })
 
   // Load the plugin that provides the "uglify" task.
   
   // Default task(s).
   grunt.registerTask('default', ['docs']);
+  grunt.registerTask('links', ['clean:links', 'to_html', 'replace:docs_navs']);
   grunt.registerTask('docs', ['clean', 'markdox', 'concat', 'markdown']);
   grunt.registerTask('mdDocs', ['clean:mdDocs','markdox']);
   grunt.registerTask('watch-less', ['watch']);

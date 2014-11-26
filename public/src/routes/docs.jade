@@ -1,0 +1,49 @@
+mixin title(module)
+  if module.path
+    a(href=module.path)= module.title
+  else
+    = module.title
+
+
+.row
+  h1(style='padding-left: 7px;')
+    a(href='/') LessShell Docs
+  .col-sm-4
+    div(style='border-right: 1px solid #e5e6e7;')
+
+      mixin title(module)
+          if module.path
+              a(href=module.path)= module.title
+          else
+              = module.title
+
+      mixin generateTemplate(modules)
+          ul
+              each module in modules
+                  li
+                      case module.level
+                          when 0
+                              h2
+                                  +title(module)
+                          when 1
+                              h3
+                                  +title(module)
+                          when 2
+                              h4
+                                  +title(module)
+                          when 3
+                              h5
+                                  +title(module)
+                          default
+                              h6
+                                  +title(module)
+
+                      if module.description
+                          p= module.description
+
+                      if module.children
+                          mixin generateTemplate(module.children)
+
+      +generateTemplate(modules)
+
+  div(class="col-sm-8" ng-include="includeDoc()") 
