@@ -1,0 +1,99 @@
+<!-- Start ../src/hdmade.js -->
+
+<h1 id="hd-stream-cli-v-0-2-0">HD|Stream-Cli v 0.2.0</h1>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 11/3/2014</li>
+<li>Description: The HDStream-cli</li>
+</ul>
+<h2 id="__base">__base</h2>
+<h2 id="modules">Modules</h2>
+<ul>
+<li><strong>fs-extra</strong>: standard file system operation with addition to the built-in fs.</li>
+<li><strong>commander</strong>: deals with reading command line arguments.</li>
+<li><strong>hdlogger</strong>: helper for printing help message (internal).</li>
+<li><strong>config</strong>: The cli configuration and settings (internal).</li>
+<li><strong>serve</strong>: The server action/task (internal).</li>
+</ul>
+<h2 id="globals">globals</h2>
+<ul>
+<li><strong>__base</strong>: The path to the main file. &quot;absolutepath/src/&quot;</li>
+</ul>
+<h2 id="-hdstream-serve-"><code>hdstream serve</code></h2>
+<h3 id="description">Description</h3>
+<p>Used to serve static files with a basic http server</p>
+<h3 id="usage">Usage</h3>
+<p>  Simply do <code>hdstream serve</code> and then you will be prompted to put in values:</p>
+<ul>
+<li>first: The port number: use a value between 8000 and 9000</li>
+<li>second: The directory to serve the files from. You could just drag and drop the folder that you want to serve and hit enter.</li>
+</ul>
+<h2 id="-hdstream-s-directory-p-port-"><code>hdstream s &lt;directory&gt; -p &lt;port&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Used to serve static files with a basic http server</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>directory</strong> : <em>string</em> (required) The directory to be served.</li>
+<li><strong>port</strong> : <em>int</em> The port number. Default: 8228</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream s path/to/serve -p portvalue</code></p>
+<h3 id="examples">Examples</h3>
+<p>  Example 1: Serve current folder at 9000</p>
+<pre><code><span class="comment">hdstream</span> <span class="comment">s</span> <span class="string">.</span> <span class="literal">-</span><span class="comment">p</span> <span class="comment">9000</code></pre>
+<p>  Example 2: Serve ./main/public at 9000</p>
+<pre><code><span class="comment">hdstream</span> <span class="comment">s</span> <span class="string">.</span><span class="comment">/main/public</span> <span class="literal">-</span><span class="comment">p</span> <span class="comment">9000</code></pre>
+<h2 id="-hdstream-theme-"><code>hdstream theme</code></h2>
+<h3 id="description">Description</h3>
+<p>Used for creating starter themes for wordpress or drupal.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream theme</code> and it will take you through the process.</p>
+<h2 id="-hdstream-test-"><code>hdstream test</code></h2>
+<h3 id="description">Description</h3>
+<p>Used for responsive/cross-browser testing</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream test</code> and then the prompt will take you through the process:</p>
+<pre><code>    <span class="number">0.</span> Select <span class="keyword">the</span> type <span class="keyword">of</span> test <span class="keyword">that</span> you want <span class="keyword">to</span> do
+    <span class="number">1.</span> Specify <span class="keyword">the</span> base url <span class="keyword">of</span> <span class="keyword">the</span> site: eg. http://markle.org
+    <span class="number">2.</span> Specify <span class="keyword">the</span> <span class="keyword">end</span> paths separated <span class="keyword">by</span> commas: <span class="keyword">about</span>.php, impact.php
+    <span class="number">3.</span> Specify <span class="keyword">the</span> viewports <span class="keyword">that</span> you want <span class="keyword">to</span> take <span class="keyword">the</span> snapshots <span class="keyword">of</span> separated <span class="keyword">by</span> commas: <span class="number">200</span>, <span class="number">300</span>, <span class="number">400</span></code></pre>
+<h2 id="-hdstream-t-k-test-type-s-settings-file-"><code>hdstream t -k &lt;test type&gt; -s &lt;settings-file&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Used to do responsive or cross browser testing without prompt</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><strong>k</strong> : <em>string</em> (required) Type of test. Possible options are: responsive(r), cross_browser(c)</li>
+<li><p><strong>s</strong> : <em>string</em> The path to the settings.json file that has the options. Below is an example of the json settings file:</p>
+<pre><code> {
+     "<span class="attribute">baseUrl</span>" : <span class="value"><span class="string">"http://markle.local.com"</span></span>,
+     "<span class="attribute">paths</span>": <span class="value">[<span class="string">"mkl-impact.php"</span>, <span class="string">"mkl-about.php"</span>]</span>,
+     "<span class="attribute">viewports</span>" : <span class="value">[<span class="number">400</span>, <span class="number">500</span>]
+ }</span></code></pre>
+</li>
+</ol>
+<h2 id="-hdstream-help-"><code>hdstream help</code></h2>
+<h3 id="description">Description</h3>
+<p>Prints a summary of options and commands that are available.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream help</code></p>
+<h2 id="-hdstream-docs-"><code>hdstream docs</code></h2>
+<h3 id="description">Description</h3>
+<p>Prints a more detailed documentation for all the tasks and options that are available.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream docs</code></p>
+<h2 id="-hdstream-docsfor-command-name-"><code>hdstream docsfor &lt;command-name&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Prints the docs for a given command.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream docsfor nameofcommand</code></p>
+<h2 id="-hdstream-scaffold-arg-params-"><code>hdstream scaffold &lt;arg&gt; &lt;params...&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Example for a task that uses all the possible options and keywords. You can refer to this as an example to remember what the possible options are.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream scaffold</code></p>
+<h2 id="-hdstream-invalidcommand-"><code>hdstream invalidcommand</code></h2>
+<h3 id="description">Description</h3>
+<p>Catches invalid commands. Prints help if the command entered is not valid.</p>
+<!-- End ../src/hdmade.js -->
+
+

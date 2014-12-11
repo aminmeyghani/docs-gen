@@ -1,0 +1,61 @@
+<!-- Start ../src/action.js -->
+
+<h2 id="action-wrapper">Action Wrapper</h2>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 11/4/2014</li>
+<li>Description: The Action Wrapper</li>
+</ul>
+<h2 id="program">program</h2>
+<h2 id="-action-wrapper-"><code>Action Wrapper</code></h2>
+<h3 id="description">Description</h3>
+<p>Simple wrapper for the commander program object. Acts as an API and can be used for creating custom actions.</p>
+<h3 id="methods-">Methods:</h3>
+<ol>
+<li><strong>add</strong> : Used to add/register tasks/actions.</li>
+</ol>
+<h2 id="add-">add()</h2>
+<h2 id="-add-options-callback-"><code>add(options, callback)</code></h2>
+<h3 id="description">Description</h3>
+<p>Adds/creates tasks on the commander module/program.</p>
+<h3 id="parameters-">Parameters:</h3>
+<ol>
+<li><p><strong>options</strong> : <em>object</em> The configuration object that contains the following:</p>
+<ul>
+<li>name: <em>string</em> (required): The name of the task/action/keyword</li>
+<li>arg: <em>string</em> The argument that refers to the the value that is immediately followed by the keyword/action.</li>
+<li>params: <em>string</em> The argument that refers to the array of arguments followed by the <code>arg</code> argument.</li>
+<li>description: <em>string</em> The action/task description.</li>
+</ul>
+</li>
+<li><p><strong>callback</strong> : <em>function</em> The function that does the heavy lifting. This callback takes three parameters:</p>
+<ul>
+<li>[data]: the first parameter references the tasks/program object.</li>
+<li>[arg]: the second parameter refers to the argument that is followed by the keyword/task name.</li>
+<li>[params]: the third argument references the array of arguments passed after the <code>arg</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="usage">Usage</h3>
+<p>  You can use the add method to register tasks or commands with a keyword and a parameter. Then pass it a callback to do whatever you like to do.</p>
+<h3 id="examples">Examples</h3>
+<p>  Example1: Creating/adding a command that prints &quot;Salute [name]&quot; given a string</p>
+<pre><code>var action = require(<span class="string">"./action"</span>)<span class="comment">;</span>
+action<span class="preprocessor">.add</span>({name: <span class="string">"hello"</span>, arg: <span class="string">"name"</span>}, function(d, name) {
+    console<span class="preprocessor">.log</span>(<span class="string">"Salute "</span> + name)<span class="comment">;</span>
+})<span class="comment">;</span>
+
+<span class="label">use:</span> hdstream hello amino -&gt; Salute amino</code></pre>
+<p>   Example 2: Create/add a command/action that prints a list of names, and name it helloall</p>
+<pre><code>var action = require(<span class="string">"./action"</span>);
+action.add({<span class="property">name</span>: <span class="string">"helloall"</span>, arg: <span class="string">"dummy"</span>, params: <span class="string">"names"</span>}, function(d, what, nms) {
+nms.forEach(function(n) {
+    console.<span class="command">log</span>(<span class="string">"hello "</span> + n);
+});
+
+// note: we need <span class="keyword">the</span> dummy placeholder <span class="keyword">for</span> <span class="keyword">the</span> correct parsing <span class="keyword">of</span> <span class="keyword">the</span> parameters. Limitation <span class="keyword">of</span> <span class="keyword">the</span> underlying module.
+
+use: hdstream helloall x n1 n2 n3 //-&gt; hello n1 \n hello n2 \n hello n3</code></pre>
+<!-- End ../src/action.js -->
+
+

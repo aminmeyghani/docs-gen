@@ -1,9 +1,9 @@
-angular.module('myApp', ['ngRoute','myApp.filters','myApp.services','myApp.directives','myApp.controllers'])
+angular.module('myApp', ['ngRoute'])
 .config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
   var routeDefaults = {
     docs : {
       name : 'doc',
-      defaultPath : 'docs/app/app-mixins'
+      defaultPath : 'docs/all/all'
     },
     demos : {
       name : 'demos',
@@ -13,7 +13,7 @@ angular.module('myApp', ['ngRoute','myApp.filters','myApp.services','myApp.direc
 
   $routeProvider.when('/docs', {redirectTo: routeDefaults.docs.defaultPath});
   $routeProvider.when('/docs/:docPath*', { templateUrl: function(params) { return 'routes/docs.htm'} });
-  $routeProvider.when('/home', {templateUrl: 'toc.htm', controller: 'MyCtrl2'});
+  $routeProvider.when('/home', {templateUrl: 'toc.htm'});
   $routeProvider.otherwise({redirectTo: '/home'});
   // Turn on for production.
   // Then need to change the
@@ -32,3 +32,6 @@ angular.module('myApp', ['ngRoute','myApp.filters','myApp.services','myApp.direc
     return '../docs/documentations/'+$routeParams.docPath+'.htm';
   }
 }])
+
+
+;

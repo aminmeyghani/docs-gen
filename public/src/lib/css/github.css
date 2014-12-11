@@ -1,12 +1,12 @@
 
-body {
+/*body {
   font-family: Helvetica, arial, sans-serif;
   font-size: 14px;
   line-height: 1.6;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: white;
-  padding: 30px; }
+  padding: 30px; }*/
 
 body > *:first-child {
   margin-top: 0 !important; }
@@ -27,13 +27,13 @@ a.anchor {
   left: 0;
   bottom: 0; }
 
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
   margin: 20px 0 10px;
   padding: 0;
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
   cursor: text;
-  position: relative; }
+  position: relative; }*/
 
 h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
   text-decoration: none; }
@@ -65,7 +65,7 @@ h2 {
   /*border-bottom: 1px solid #cccccc;*/
   color: black; }
 
-h3 {
+/*h3 {
   font-size: 17px; }
 
 h4 {
@@ -76,7 +76,7 @@ h5 {
 
 h6 {
   color: #777777;
-  font-size: 14px; }
+  font-size: 14px; }*/
 
 p, blockquote, ul, ol, dl, li, table, pre {
   margin: 15px 0; }
@@ -88,7 +88,7 @@ hr {
   height: 4px;
   padding: 0; }
 
-body > h2:first-child {
+/*body > h2:first-child {
   margin-top: 0;
   padding-top: 0; }
 body > h1:first-child {
@@ -99,7 +99,7 @@ body > h1:first-child {
     padding-top: 0; }
 body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
   margin-top: 0;
-  padding-top: 0; }
+  padding-top: 0; }*/
 
 a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
   margin-top: 0;

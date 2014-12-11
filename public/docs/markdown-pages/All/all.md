@@ -1,349 +1,367 @@
 
 
-<!-- Start ../../../../Desktop/less-sample/app/app-mixins.less -->
+<!-- Start ../src/action.js -->
 
-# Mixin Interfaces #
+## Action Wrapper ##
 
-##`.fix-float()`##
+- Author: Amin Meyghani
+- Date: 11/4/2014
+- Description: The Action Wrapper
 
-### Description ###
+## program
 
-Can be used to wrap around floated elements. Using `fix-float`, the wrapper
-gets a height and stays in the flow of the document.
-
-### Parameters: none ###
-
-### Usage ###
-  Apply the class to a wrapper div that contains floated elements.
-
-### Example ###
-
-    <div class="fix-float">
-      <div>floated div</div>
-      <div>floated div</div>
-      <div>floated div</div>
-    </div>
-**********************
-
-##`.box-shadow-well([@blur, @speed, @color])`
+##`Action Wrapper`
 
 ### Description ###
 
-Creats a subtle well region with a small inner shadow.
+Simple wrapper for the commander program object. Acts as an API and can be used for creating custom actions.
+
+### Methods: ###
+
+1. __add__ : Used to add/register tasks/actions.
+
+## add()
+
+##`add(options, callback)`
+
+### Description ###
+
+Adds/creates tasks on the commander module/program.
 
 ### Parameters: ###
+1. __options__ : *object* The configuration object that contains the following:
 
-__@blur__ (optional) : The amout of shadow blur in pixels or any other valid units.
+  - name: *string* (required): The name of the task/action/keyword
+  - arg: *string* The argument that refers to the the value that is immediately followed by the keyword/action.
+  - params: *string* The argument that refers to the array of arguments followed by the `arg` argument.
+  - description: *string* The action/task description.
+2. __callback__ : *function* The function that does the heavy lifting. This callback takes three parameters:
 
-__@speed__ (optional) : The amout of shadow speed in pixels or any other valid units.
-
-__@color__ (optional) : The shadow color in any valid color units.
-
-### Usage ###
-  Can be mixed in with any block-level component. The three parameters are optional.
-  It is also possible to use each parameter individually. See examples below.
-
-### Examples ###
-    
-    // All the examples below are block-level elements.
-    .example1{
-      .box-shadow-well(10px, 10px, #000); // using all the parameters
-    }
-
-    .example2{
-      .box-shadow-well(); // Calling without any parameters.
-    }
-
-    .example3{
-      // Calling with one parameter. 
-      // Note that the order of the parameter is not important.
-      .box-shadow-well(@color : #e5e6e7);
-    }
-
-##`.smooth([@what, @duration, @timing-function])`
-
-### Description ###
-
-Used to add CSS3 transition to the specified property.
-
-### Parameters: ###
-
-1. __@what__ (optional)  *string or non-string* : The CSS property to which we want to add the transition:
-The default value is `all` which applies the transition to all the properties.
-
-2. __@duration__ (optional) *integer* : The duration of the transition. The default value is 200ms.
-
-3. __@timing-function__ (optional) *string or non-string* : A valid timing function for the transition.
-The default value is `linear`.
+  - [data]: the first parameter references the tasks/program object.
+  - [arg]: the second parameter refers to the argument that is followed by the keyword/task name.
+  - [params]: the third argument references the array of arguments passed after the `arg`.
 
 ### Usage ###
-  Can be mixed in with other classes or ids or anywhere. Cannot be called by itself to generate 
-  classes or ids.s
-
-### Examples ###
-    // Example to set transition for the hover state of the anchor links.
-    // using all the parameters.
-    a, a:hover{
-      .smooth("color",250ms, "ease-out");
-    }
-
-    // Setting transitino for the background color of a box.
-    .box, .box:hover{
-      .smooth(@what: 'background-color');
-    }
-
-##`.custom-loop(@n: 3 [, @base-value:1, @unit: '%', @property:font-size, @selector: ~".fs-", @step-size: 2])`
-
-### Description ###
-
-General purpose loop for creating repeated selectors containing one property that increments
-at a particular value.
-
-### Parameters: ###
-
-1. __@n__  *integer*: The number of iterations.
-
-2. __@base-value__ (optional) *integer*: The starting value for the loop to be assigned to the property. Default value is the same is the value assigned for the number of iterations `@n`.
-
-3. __@unit__ (optional) *string*: The unit for the property. Default value is `px`.
-
-4. __@property__ (optional) *non-string* or *string*:  The CSS property. Default value is `width`
-
-5. __@selector__ (optional) *escaped string* : The selector used for the loop. Could be anything as long as it is passed in as a escaped string.
-
-6. __@step-size__ (optional) *integer*: The value by which the loop increments by.
-
-7. __@isReverse__ (optional) *boolean*: If set to true, it will reverse the loop. Default value is false.
-
-### Usage ###
-  The mixin can be called inside the LESS independently.
-
-### Examples ###
-    // Using just the required parameter.
-    .custom-loop(@n:3);
-    //->
-    .span-1 {
-      width: 3px;
-    }
-    .span-2 {
-      width: 4px;
-    }
-    .span-3 {
-      width: 5px;
-    }
-
-    //Using all the optional Parameters.
-    .custom-loop( @n: 3 , @base-value:1, @unit: '%', @property:font-size, @selector: ~".fs-", @step-size: 2);
-    //->
-    .fs-1 {
-      font-size: 1%;
-    }
-    .fs-2 {
-      font-size: 3%;
-    }
-    .fs-3 {
-      font-size: 5%;
-    }
-
-    // Using the @isReverse option to create h1 to h3 headings where h1 is the largest value and h3 is the smallest.
-    .custom-loop( @n: 3 , @base-value:14,  @property:font-size, @selector: h, @step-size: 2, @isReverse:true);
-    //->
-    h3 {
-      font-size: 14px;
-    }
-    h2 {
-      font-size: 16px;
-    }
-    h1 {
-      font-size: 18px;
-    }
-
-##`.make-fibo-for(@how-many, @starting-term [, @unit, @step-size, @class-name, @property])`
-
-### Description ###
-
-Makes font sizes by default based on the fibonacci sequence. You can also target another property
-such as width with a custom class.
-
-### Parameters: ###
-
-__@how-many__ : The number of terms that you need. For example, if you pass in 3 with starting term of
-5, you will get 5, 8 ,13.
-
-__@starting-term__ : The starting term that you want to start the sequence from. If you pass 5,  
-then you will get 5, 8, 13,... for example.
-
-__@unit__ (optional) : The unit used for the property. By default the unit is `px`. You can pass in other
-units, but make sure to pass in the `%` unit as a string. That is: `.make-fibo-for(@unit: '%', @how-many: 2 ...);`
-
-__@stepsize__ (optional) : is the distance between the generated classes. The default value is one 
-which by default produces `fs-1, fs-2,...`.
-
-__@class-name__ (optional) : The sequential generated class. By default the class name is `fs`. You
-can pass other names such as my-selector: `.make-fibo-for(@class-name: my-selector, ...);` 
-//-> my-selector-1, my-selector-2, .... 
-
-__@property__ (optional) : The CSS property that you need to target. By default this is set to `font-size`.
-You can target the `width` property for example: `.make-fibo-for(@property : width, @how-many:2, ...);`.
-
-### Usage ###
-  You can use this mixin independently in you LESS file and the classes will be generated automatically.
-
-### Examples ###
-    // Using the default values and just specifying the number of terms and the starting term.
-
-    .make-fibo-for( @how-many:5 , @starting-term:6 );
-    //->
-    .fs-1 {
-      font-size: 8px;
-    }
-    .fs-2 {
-      font-size: 13px;
-    }
-    .fs-3 {
-      font-size: 21px;
-    }
-    .fs-4 {
-      font-size: 34px;
-    }
-    .fs-5 {
-      font-size: 55px;
-    }
-
-    // Creating classes for the width property with custom class names and custom unit.
-
-    .make-fibo-for( @how-many:5 , @starting-term:6 , @unit:'%', @property : width, @class-name : mygrid);
-
-    .mygrid-1 {
-      width: 8%;
-    }
-    .mygrid-2 {
-      width: 13%;
-    }
-    .mygrid-3 {
-      width: 21%;
-    }
-    .mygrid-4 {
-      width: 34%;
-    }
-    .mygrid-5 {
-      width: 55%;
-    }
-  
-    // using custom selectors
-    .make-fibo-for( @how-many:5 , @starting-term:6 , @unit:'%', @property : width, @class-name : ~"gs .fs-");
-    //->
-    .gs .fs-1 {
-      width: 8%;
-    }
-    .gs .fs-2 {
-      width: 13%;
-    }
-    .gs .fs-3 {
-      width: 21%;
-    }
-    .gs .fs-4 {
-      width: 34%;
-    }
-    .gs .fs-5 {
-      width: 55%;
-    }
-
-<!-- End ../../../../Desktop/less-sample/app/app-mixins.less -->
-
-
-
-
-<!-- Start ../../sassmin/functions/_low-level.scss -->
-
-##`ø($value)`
-
-### Description ###
-
-Converts input to zero or zero[unit]
-
-### Parameters: ###
-
-2. __$value__ : *non-string or number* The value to be turned to zero or zero[units]. If the input has units, it will be carried over.
-
-### Usage ###
-  Can be called anywhere as a function in your sass.
+  You can use the add method to register tasks or commands with a keyword and a parameter. Then pass it a callback to do whatever you like to do.
 
 ### Examples ###
 
-    .example1 {
-      font-size: ø(2px) // -> font-size: 0px;
-    }
+  Example1: Creating/adding a command that prints "Salute [name]" given a string
 
-    .example2 {
-      border: ø(0) // -> font-size: 0;
-    }
+    var action = require("./action");
+    action.add({name: "hello", arg: "name"}, function(d, name) {
+    	console.log("Salute " + name);
+    });
 
-##`µ($value)`
+    use: hdstream hello amino -> Salute amino
+
+   Example 2: Create/add a command/action that prints a list of names, and name it helloall
+
+    var action = require("./action");
+    action.add({name: "helloall", arg: "dummy", params: "names"}, function(d, what, nms) {
+    nms.forEach(function(n) {
+    	console.log("hello " + n);
+    });
+
+    // note: we need the dummy placeholder for the correct parsing of the parameters. Limitation of the underlying module.
+
+    use: hdstream helloall x n1 n2 n3 //-> hello n1 \n hello n2 \n hello n3
+
+<!-- End ../src/action.js -->
+
+
+
+
+<!-- Start ../src/actions/capture/capture.js -->
+
+# actions/tester
+
+- Author: Amin Meyghani
+- Date: 10/12/2014
+- Description: Tester Action
+
+## jf
+
+## Modules
+
+- __jsonfile__: For reading json file.
+- __inquirer__: Creates friendly command line interface input.
+- __hdlogger__: helper for printing help message (internal).
+- __snap__: Handles taking screenshots.
+
+<!-- End ../src/actions/capture/capture.js -->
+
+
+
+
+<!-- Start ../src/actions/capture/snap.js -->
+
+# actions/capture/snap
+
+- Author: Amin Meyghani
+- Date: 10/12/2014
+- Description: Low level implementation for taking snapshots.
+
+## Spooky
+
+## Modules
+
+- __spooky__: Driver for casperjs inside the Node env.
+
+<!-- End ../src/actions/capture/snap.js -->
+
+
+
+
+<!-- Start ../src/actions/hello.js -->
+
+<!-- End ../src/actions/hello.js -->
+
+
+
+
+<!-- Start ../src/actions/scaffold.js -->
+
+<!-- End ../src/actions/scaffold.js -->
+
+
+
+
+<!-- Start ../src/actions/serve.js -->
+
+## actions/serve ##
+
+- Author: Amin Meyghani
+- Date: 11/4/2014
+- Description: Responsible for starting a simple static http server.
+
+##`run`
 
 ### Description ###
 
-Converts to one or one[unit]
+Runs the action.
 
-### Parameters: ###
+### Params: ###
 
-2. __$value__ : *non-string or number* The value to be turned to one or one[units]. If the input has units, it will be carried over.
+1. __questions__ : Questions configuration used to ask user input.
 
-### Usage ###
-  Can be called anywhere as a function in your sass.
+## http
 
-### Examples ###
+hint:
+	current directory: whereever it is you are in the terminal currently.
+	directory from which the code is running from: node_modules/hdmade/src/actions
 
-    .example1 {
-      font-size: µ(2) // -> font-size: 1;
-    }
-
-    .example2 {
-      border: µ(2px) // -> font-size: 1px;
-    }
-
-<!-- End ../../sassmin/functions/_low-level.scss -->
+<!-- End ../src/actions/serve.js -->
 
 
 
 
-<!-- Start ../../sassmin/functions/_math.scss -->
+<!-- Start ../src/actions/theme.js -->
 
-##`power($base, $exponent)`
+## actions/theme ##
 
-<!-- End ../../sassmin/functions/_math.scss -->
+- Author: Amin Meyghani
+- Date: 11/4/2014
+- Description: Responsible for scaffolding themes.
 
+## inquirer
 
-
-
-<!-- Start ../../sassmin/functions/_utils.scss -->
-
-##`strip($value)`
+##`run`
 
 ### Description ###
 
-Remove units or non-string elements immediately followed by numbers.
+Runs the action.
+
+### Params: ###
+
+1. __questions__ : Questions configuration used to ask user input.
+
+<!-- End ../src/actions/theme.js -->
+
+
+
+
+<!-- Start ../src/config.js -->
+
+## pkg
+
+Application Settings
+
+<!-- End ../src/config.js -->
+
+
+
+
+<!-- Start ../src/hdmade.js -->
+
+# HD|Stream-Cli v 0.2.0
+
+- Author: Amin Meyghani
+- Date: 11/3/2014
+- Description: The HDStream-cli
+
+## __base
+
+## Modules
+
+- __fs-extra__: standard file system operation with addition to the built-in fs.
+- __commander__: deals with reading command line arguments.
+- __hdlogger__: helper for printing help message (internal).
+- __config__: The cli configuration and settings (internal).
+- __serve__: The server action/task (internal).
+
+## globals
+
+- ____base__: The path to the main file. "absolutepath/src/"
+
+##`hdstream serve`
+
+### Description ###
+
+Used to serve static files with a basic http server
+
+### Usage ###
+  Simply do `hdstream serve` and then you will be prompted to put in values:
+  - first: The port number: use a value between 8000 and 9000
+  - second: The directory to serve the files from. You could just drag and drop the folder that you want to serve and hit enter.
+
+##`hdstream s <directory> -p <port>`
+
+### Description ###
+
+Used to serve static files with a basic http server
 
 ### Parameters: ###
 
-2. __$value__ : *number[unit]* The input with or without unit to be stripped.
+1. __directory__ : *string* (required) The directory to be served.
+2. __port__ : *int* The port number. Default: 8228
 
 ### Usage ###
-  Can be called anywhere as a function in your sass. Useful when you need to strip off stuff that are immediately followed after a number.
+  Just do `hdstream s path/to/serve -p portvalue`
 
 ### Examples ###
 
-    .example1 {
-      font-size: strip(2) // -> font-size: 2;
-    }
+  Example 1: Serve current folder at 9000
 
-    .example2 {
-      border: strip(2px) // -> font-size: 2;
-    }
+    hdstream s . -p 9000
 
-    .example3 {
-      border: strip(3something) // -> font-size: 3;
-    }
+  Example 2: Serve ./main/public at 9000
 
-<!-- End ../../sassmin/functions/_utils.scss -->
+    hdstream s ./main/public -p 9000
+
+##`hdstream theme`
+
+### Description ###
+
+Used for creating starter themes for wordpress or drupal.
+
+### Usage ###
+  Just do `hdstream theme` and it will take you through the process.
+
+##`hdstream test`
+
+### Description ###
+
+Used for responsive/cross-browser testing
+
+### Usage ###
+  Just do `hdstream test` and then the prompt will take you through the process:
+
+		0. Select the type of test that you want to do
+		1. Specify the base url of the site: eg. http://markle.org
+		2. Specify the end paths separated by commas: about.php, impact.php
+		3. Specify the viewports that you want to take the snapshots of separated by commas: 200, 300, 400
+
+##`hdstream t -k <test type> -s <settings-file>`
+
+### Description ###
+
+Used to do responsive or cross browser testing without prompt
+
+### Parameters: ###
+
+1. __k__ : *string* (required) Type of test. Possible options are: responsive(r), cross_browser(c)
+2. __s__ : *string* The path to the settings.json file that has the options. Below is an example of the json settings file:
+
+		{
+			"baseUrl" : "http://markle.local.com",
+			"paths": ["mkl-impact.php", "mkl-about.php"],
+			"viewports" : [400, 500]
+		}
+
+##`hdstream help`
+
+### Description ###
+
+Prints a summary of options and commands that are available.
+
+### Usage ###
+  Just do `hdstream help`
+
+##`hdstream docs`
+
+### Description ###
+
+Prints a more detailed documentation for all the tasks and options that are available.
+
+### Usage ###
+  Just do `hdstream docs`
+
+##`hdstream docsfor <command-name>`
+
+### Description ###
+
+Prints the docs for a given command.
+
+### Usage ###
+  Just do `hdstream docsfor nameofcommand`
+
+##`hdstream scaffold <arg> <params...>`
+
+### Description ###
+
+Example for a task that uses all the possible options and keywords. You can refer to this as an example to remember what the possible options are.
+
+### Usage ###
+  Just do `hdstream scaffold`
+
+##`hdstream invalidcommand`
+
+### Description ###
+
+Catches invalid commands. Prints help if the command entered is not valid.
+
+<!-- End ../src/hdmade.js -->
+
+
+
+
+<!-- Start ../src/lib/hdlogger.js -->
+
+- Author: Amin Meyghani
+	- Date: 09/29/2014
+	- Description: Helper for logging to the console.
+
+	### Modules ###
+- __colors__: add colors to the console output.
+- __chalk__: pretty printing to the console.
+
+<!-- End ../src/lib/hdlogger.js -->
+
+
+
+
+<!-- Start ../src/lib/hdserver.js -->
+
+Author: Amin Meyghani
+	Date: 09/30/2014
+	Description: 
+		Simple web server for running tests or taking screenshots.
+
+Useful for logging information:
+			server.address()
+			server.address().address
+			server.address().port
+
+<!-- End ../src/lib/hdserver.js -->
 

@@ -1,291 +1,303 @@
+<!-- Start ../src/action.js -->
 
-  <!-- Start ../../../../Desktop/less-sample/app/app-mixins.less -->
-
-<h1 id="mixin-interfaces">Mixin Interfaces</h1>
-<h2 id="-fix-float-"><code>.fix-float()</code></h2>
+<h2 id="action-wrapper">Action Wrapper</h2>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 11/4/2014</li>
+<li>Description: The Action Wrapper</li>
+</ul>
+<h2 id="program">program</h2>
+<h2 id="-action-wrapper-"><code>Action Wrapper</code></h2>
 <h3 id="description">Description</h3>
-<p>Can be used to wrap around floated elements. Using <code>fix-float</code>, the wrapper
-gets a height and stays in the flow of the document.</p>
-<h3 id="parameters-none">Parameters: none</h3>
-<h3 id="usage">Usage</h3>
-<p>  Apply the class to a wrapper div that contains floated elements.</p>
-<h3 id="example">Example</h3>
-<pre><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"fix-float"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span>&gt;</span>floated div<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span>&gt;</span>floated div<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span>&gt;</span>floated div<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<hr>
-<h2 id="-box-shadow-well-blur-speed-color-"><code>.box-shadow-well([@blur, @speed, @color])</code></h2>
+<p>Simple wrapper for the commander program object. Acts as an API and can be used for creating custom actions.</p>
+<h3 id="methods-">Methods:</h3>
+<ol>
+<li><strong>add</strong> : Used to add/register tasks/actions.</li>
+</ol>
+<h2 id="add-">add()</h2>
+<h2 id="-add-options-callback-"><code>add(options, callback)</code></h2>
 <h3 id="description">Description</h3>
-<p>Creats a subtle well region with a small inner shadow.</p>
-<h3 id="parameters-">Parameters:</h3>
-<p><strong>@blur</strong> (optional) : The amout of shadow blur in pixels or any other valid units.</p>
-<p><strong>@speed</strong> (optional) : The amout of shadow speed in pixels or any other valid units.</p>
-<p><strong>@color</strong> (optional) : The shadow color in any valid color units.</p>
-<h3 id="usage">Usage</h3>
-<p>  Can be mixed in with any block-level component. The three parameters are optional.
-  It is also possible to use each parameter individually. See examples below.</p>
-<h3 id="examples">Examples</h3>
-<pre><code><span class="comment">// All the examples below are block-level elements.</span>
-<span class="variable">.example1</span>{
-  <span class="variable">.box</span>-shadow-well(<span class="number">10</span>px, <span class="number">10</span>px, <span class="preprocessor">#000); // using all the parameters</span>
-}
-
-<span class="variable">.example2</span>{
-  <span class="variable">.box</span>-shadow-well(); <span class="comment">// Calling without any parameters.</span>
-}
-
-<span class="variable">.example3</span>{
-  <span class="comment">// Calling with one parameter. </span>
-  <span class="comment">// Note that the order of the parameter is not important.</span>
-  <span class="variable">.box</span>-shadow-well(@color : <span class="preprocessor">#e5e6e7);</span>
-}</code></pre>
-<h2 id="-smooth-what-duration-timing-function-"><code>.smooth([@what, @duration, @timing-function])</code></h2>
-<h3 id="description">Description</h3>
-<p>Used to add CSS3 transition to the specified property.</p>
+<p>Adds/creates tasks on the commander module/program.</p>
 <h3 id="parameters-">Parameters:</h3>
 <ol>
-<li><p><strong>@what</strong> (optional)  <em>string or non-string</em> : The CSS property to which we want to add the transition:
-The default value is <code>all</code> which applies the transition to all the properties.</p>
+<li><p><strong>options</strong> : <em>object</em> The configuration object that contains the following:</p>
+<ul>
+<li>name: <em>string</em> (required): The name of the task/action/keyword</li>
+<li>arg: <em>string</em> The argument that refers to the the value that is immediately followed by the keyword/action.</li>
+<li>params: <em>string</em> The argument that refers to the array of arguments followed by the <code>arg</code> argument.</li>
+<li>description: <em>string</em> The action/task description.</li>
+</ul>
 </li>
-<li><p><strong>@duration</strong> (optional) <em>integer</em> : The duration of the transition. The default value is 200ms.</p>
-</li>
-<li><p><strong>@timing-function</strong> (optional) <em>string or non-string</em> : A valid timing function for the transition.
-The default value is <code>linear</code>.</p>
+<li><p><strong>callback</strong> : <em>function</em> The function that does the heavy lifting. This callback takes three parameters:</p>
+<ul>
+<li>[data]: the first parameter references the tasks/program object.</li>
+<li>[arg]: the second parameter refers to the argument that is followed by the keyword/task name.</li>
+<li>[params]: the third argument references the array of arguments passed after the <code>arg</code>.</li>
+</ul>
 </li>
 </ol>
 <h3 id="usage">Usage</h3>
-<p>  Can be mixed in with other classes or ids or anywhere. Cannot be called by itself to generate 
-  classes or ids.s</p>
+<p>  You can use the add method to register tasks or commands with a keyword and a parameter. Then pass it a callback to do whatever you like to do.</p>
 <h3 id="examples">Examples</h3>
-<pre><code>// Example <span class="keyword">to</span> <span class="keyword">set</span> transition <span class="keyword">for</span> <span class="keyword">the</span> hover state <span class="keyword">of</span> <span class="keyword">the</span> anchor links.
-// using all <span class="keyword">the</span> parameters.
-a, a:hover{
-  .smooth(<span class="string">"color"</span>,<span class="number">250</span>ms, <span class="string">"ease-out"</span>);
-}
+<p>  Example1: Creating/adding a command that prints &quot;Salute [name]&quot; given a string</p>
+<pre><code>var action = require(<span class="string">"./action"</span>)<span class="comment">;</span>
+action<span class="preprocessor">.add</span>({name: <span class="string">"hello"</span>, arg: <span class="string">"name"</span>}, function(d, name) {
+    console<span class="preprocessor">.log</span>(<span class="string">"Salute "</span> + name)<span class="comment">;</span>
+})<span class="comment">;</span>
 
-// Setting transitino <span class="keyword">for</span> <span class="keyword">the</span> background color <span class="keyword">of</span> a box.
-.box, .box:hover{
-  .smooth(@what: 'background-color');
-}</code></pre>
-<h2 id="-custom-loop-n-3-base-value-1-unit-property-font-size-selector-fs-step-size-2-"><code>.custom-loop(@n: 3 [, @base-value:1, @unit: &#39;%&#39;, @property:font-size, @selector: ~&quot;.fs-&quot;, @step-size: 2])</code></h2>
+<span class="label">use:</span> hdstream hello amino -&gt; Salute amino</code></pre>
+<p>   Example 2: Create/add a command/action that prints a list of names, and name it helloall</p>
+<pre><code>var action = require(<span class="string">"./action"</span>);
+action.add({<span class="property">name</span>: <span class="string">"helloall"</span>, arg: <span class="string">"dummy"</span>, params: <span class="string">"names"</span>}, function(d, what, nms) {
+nms.forEach(function(n) {
+    console.<span class="command">log</span>(<span class="string">"hello "</span> + n);
+});
+
+// note: we need <span class="keyword">the</span> dummy placeholder <span class="keyword">for</span> <span class="keyword">the</span> correct parsing <span class="keyword">of</span> <span class="keyword">the</span> parameters. Limitation <span class="keyword">of</span> <span class="keyword">the</span> underlying module.
+
+use: hdstream helloall x n1 n2 n3 //-&gt; hello n1 \n hello n2 \n hello n3</code></pre>
+<!-- End ../src/action.js -->
+
+
+
+
+<!-- Start ../src/actions/capture/capture.js -->
+
+<h1 id="actions-tester">actions/tester</h1>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 10/12/2014</li>
+<li>Description: Tester Action</li>
+</ul>
+<h2 id="jf">jf</h2>
+<h2 id="modules">Modules</h2>
+<ul>
+<li><strong>jsonfile</strong>: For reading json file.</li>
+<li><strong>inquirer</strong>: Creates friendly command line interface input.</li>
+<li><strong>hdlogger</strong>: helper for printing help message (internal).</li>
+<li><strong>snap</strong>: Handles taking screenshots.</li>
+</ul>
+<!-- End ../src/actions/capture/capture.js -->
+
+
+
+
+<!-- Start ../src/actions/capture/snap.js -->
+
+<h1 id="actions-capture-snap">actions/capture/snap</h1>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 10/12/2014</li>
+<li>Description: Low level implementation for taking snapshots.</li>
+</ul>
+<h2 id="spooky">Spooky</h2>
+<h2 id="modules">Modules</h2>
+<ul>
+<li><strong>spooky</strong>: Driver for casperjs inside the Node env.</li>
+</ul>
+<!-- End ../src/actions/capture/snap.js -->
+
+
+
+
+<!-- Start ../src/actions/hello.js -->
+
+<!-- End ../src/actions/hello.js -->
+
+
+
+
+<!-- Start ../src/actions/scaffold.js -->
+
+<!-- End ../src/actions/scaffold.js -->
+
+
+
+
+<!-- Start ../src/actions/serve.js -->
+
+<h2 id="actions-serve">actions/serve</h2>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 11/4/2014</li>
+<li>Description: Responsible for starting a simple static http server.</li>
+</ul>
+<h2 id="-run-"><code>run</code></h2>
 <h3 id="description">Description</h3>
-<p>General purpose loop for creating repeated selectors containing one property that increments
-at a particular value.</p>
+<p>Runs the action.</p>
+<h3 id="params-">Params:</h3>
+<ol>
+<li><strong>questions</strong> : Questions configuration used to ask user input.</li>
+</ol>
+<h2 id="http">http</h2>
+<p>hint:
+    current directory: whereever it is you are in the terminal currently.
+    directory from which the code is running from: node_modules/hdmade/src/actions</p>
+<!-- End ../src/actions/serve.js -->
+
+
+
+
+<!-- Start ../src/actions/theme.js -->
+
+<h2 id="actions-theme">actions/theme</h2>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 11/4/2014</li>
+<li>Description: Responsible for scaffolding themes.</li>
+</ul>
+<h2 id="inquirer">inquirer</h2>
+<h2 id="-run-"><code>run</code></h2>
+<h3 id="description">Description</h3>
+<p>Runs the action.</p>
+<h3 id="params-">Params:</h3>
+<ol>
+<li><strong>questions</strong> : Questions configuration used to ask user input.</li>
+</ol>
+<!-- End ../src/actions/theme.js -->
+
+
+
+
+<!-- Start ../src/config.js -->
+
+<h2 id="pkg">pkg</h2>
+<p>Application Settings</p>
+<!-- End ../src/config.js -->
+
+
+
+
+<!-- Start ../src/hdmade.js -->
+
+<h1 id="hd-stream-cli-v-0-2-0">HD|Stream-Cli v 0.2.0</h1>
+<ul>
+<li>Author: Amin Meyghani</li>
+<li>Date: 11/3/2014</li>
+<li>Description: The HDStream-cli</li>
+</ul>
+<h2 id="__base">__base</h2>
+<h2 id="modules">Modules</h2>
+<ul>
+<li><strong>fs-extra</strong>: standard file system operation with addition to the built-in fs.</li>
+<li><strong>commander</strong>: deals with reading command line arguments.</li>
+<li><strong>hdlogger</strong>: helper for printing help message (internal).</li>
+<li><strong>config</strong>: The cli configuration and settings (internal).</li>
+<li><strong>serve</strong>: The server action/task (internal).</li>
+</ul>
+<h2 id="globals">globals</h2>
+<ul>
+<li><strong>__base</strong>: The path to the main file. &quot;absolutepath/src/&quot;</li>
+</ul>
+<h2 id="-hdstream-serve-"><code>hdstream serve</code></h2>
+<h3 id="description">Description</h3>
+<p>Used to serve static files with a basic http server</p>
+<h3 id="usage">Usage</h3>
+<p>  Simply do <code>hdstream serve</code> and then you will be prompted to put in values:</p>
+<ul>
+<li>first: The port number: use a value between 8000 and 9000</li>
+<li>second: The directory to serve the files from. You could just drag and drop the folder that you want to serve and hit enter.</li>
+</ul>
+<h2 id="-hdstream-s-directory-p-port-"><code>hdstream s &lt;directory&gt; -p &lt;port&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Used to serve static files with a basic http server</p>
 <h3 id="parameters-">Parameters:</h3>
 <ol>
-<li><p><strong>@n</strong>  <em>integer</em>: The number of iterations.</p>
-</li>
-<li><p><strong>@base-value</strong> (optional) <em>integer</em>: The starting value for the loop to be assigned to the property. Default value is the same is the value assigned for the number of iterations <code>@n</code>.</p>
-</li>
-<li><p><strong>@unit</strong> (optional) <em>string</em>: The unit for the property. Default value is <code>px</code>.</p>
-</li>
-<li><p><strong>@property</strong> (optional) <em>non-string</em> or <em>string</em>:  The CSS property. Default value is <code>width</code></p>
-</li>
-<li><p><strong>@selector</strong> (optional) <em>escaped string</em> : The selector used for the loop. Could be anything as long as it is passed in as a escaped string.</p>
-</li>
-<li><p><strong>@step-size</strong> (optional) <em>integer</em>: The value by which the loop increments by.</p>
-</li>
-<li><p><strong>@isReverse</strong> (optional) <em>boolean</em>: If set to true, it will reverse the loop. Default value is false.</p>
-</li>
+<li><strong>directory</strong> : <em>string</em> (required) The directory to be served.</li>
+<li><strong>port</strong> : <em>int</em> The port number. Default: 8228</li>
 </ol>
 <h3 id="usage">Usage</h3>
-<p>  The mixin can be called inside the LESS independently.</p>
+<p>  Just do <code>hdstream s path/to/serve -p portvalue</code></p>
 <h3 id="examples">Examples</h3>
-<pre><code><span class="comment">// Using just the required parameter.</span>
-.custom-loop(<span class="variable">@n</span>:<span class="number">3</span>);
-<span class="comment">//-&gt;</span>
-.span-<span class="number">1</span> {
-  width: <span class="number">3</span>px;
-}
-.span-<span class="number">2</span> {
-  width: <span class="number">4</span>px;
-}
-.span-<span class="number">3</span> {
-  width: <span class="number">5</span>px;
-}
-
-<span class="comment">//Using all the optional Parameters.</span>
-.custom-loop( <span class="variable">@n</span>: <span class="number">3</span> , <span class="variable">@base</span>-value:<span class="number">1</span>, <span class="variable">@unit</span>: <span class="string">'%'</span>, <span class="variable">@property</span>:font-<span class="keyword">size</span>, <span class="variable">@selector</span>: ~<span class="string">".fs-"</span>, <span class="variable">@step</span>-<span class="keyword">size</span>: <span class="number">2</span>);
-<span class="comment">//-&gt;</span>
-.fs-<span class="number">1</span> {
-  font-<span class="keyword">size</span>: <span class="number">1</span><span class="variable">%;</span>
-}
-.fs-<span class="number">2</span> {
-  font-<span class="keyword">size</span>: <span class="number">3</span><span class="variable">%;</span>
-}
-.fs-<span class="number">3</span> {
-  font-<span class="keyword">size</span>: <span class="number">5</span><span class="variable">%;</span>
-}
-
-<span class="comment">// Using the @isReverse option to create h1 to h3 headings where h1 is the largest value and h3 is the smallest.</span>
-.custom-loop( <span class="variable">@n</span>: <span class="number">3</span> , <span class="variable">@base</span>-value:<span class="number">14</span>,  <span class="variable">@property</span>:font-<span class="keyword">size</span>, <span class="variable">@selector</span>: h, <span class="variable">@step</span>-<span class="keyword">size</span>: <span class="number">2</span>, <span class="variable">@isReverse</span>:true);
-<span class="comment">//-&gt;</span>
-h3 {
-  font-<span class="keyword">size</span>: <span class="number">14</span>px;
-}
-h2 {
-  font-<span class="keyword">size</span>: <span class="number">16</span>px;
-}
-h1 {
-  font-<span class="keyword">size</span>: <span class="number">18</span>px;
-}</code></pre>
-<h2 id="-make-fibo-for-how-many-starting-term-unit-step-size-class-name-property-"><code>.make-fibo-for(@how-many, @starting-term [, @unit, @step-size, @class-name, @property])</code></h2>
+<p>  Example 1: Serve current folder at 9000</p>
+<pre><code><span class="comment">hdstream</span> <span class="comment">s</span> <span class="string">.</span> <span class="literal">-</span><span class="comment">p</span> <span class="comment">9000</code></pre>
+<p>  Example 2: Serve ./main/public at 9000</p>
+<pre><code><span class="comment">hdstream</span> <span class="comment">s</span> <span class="string">.</span><span class="comment">/main/public</span> <span class="literal">-</span><span class="comment">p</span> <span class="comment">9000</code></pre>
+<h2 id="-hdstream-theme-"><code>hdstream theme</code></h2>
 <h3 id="description">Description</h3>
-<p>Makes font sizes by default based on the fibonacci sequence. You can also target another property
-such as width with a custom class.</p>
-<h3 id="parameters-">Parameters:</h3>
-<p><strong>@how-many</strong> : The number of terms that you need. For example, if you pass in 3 with starting term of
-5, you will get 5, 8 ,13.</p>
-<p><strong>@starting-term</strong> : The starting term that you want to start the sequence from. If you pass 5,<br>then you will get 5, 8, 13,... for example.</p>
-<p><strong>@unit</strong> (optional) : The unit used for the property. By default the unit is <code>px</code>. You can pass in other
-units, but make sure to pass in the <code>%</code> unit as a string. That is: <code>.make-fibo-for(@unit: &#39;%&#39;, @how-many: 2 ...);</code></p>
-<p><strong>@stepsize</strong> (optional) : is the distance between the generated classes. The default value is one 
-which by default produces <code>fs-1, fs-2,...</code>.</p>
-<p><strong>@class-name</strong> (optional) : The sequential generated class. By default the class name is <code>fs</code>. You
-can pass other names such as my-selector: <code>.make-fibo-for(@class-name: my-selector, ...);</code> 
-//-&gt; my-selector-1, my-selector-2, .... </p>
-<p><strong>@property</strong> (optional) : The CSS property that you need to target. By default this is set to <code>font-size</code>.
-You can target the <code>width</code> property for example: <code>.make-fibo-for(@property : width, @how-many:2, ...);</code>.</p>
+<p>Used for creating starter themes for wordpress or drupal.</p>
 <h3 id="usage">Usage</h3>
-<p>  You can use this mixin independently in you LESS file and the classes will be generated automatically.</p>
-<h3 id="examples">Examples</h3>
-<pre><code>// Using the default values <span class="keyword">and</span> just specifying the number of terms <span class="keyword">and</span> the starting term.
-
-<span class="preprocessor">.make</span>-fibo-for( @how-many:<span class="number">5</span> , @starting-term:<span class="number">6</span> )<span class="comment">;</span>
-//-&gt;
-<span class="preprocessor">.fs</span>-<span class="number">1</span> {
-  font-size: <span class="number">8</span>px<span class="comment">;</span>
-}
-<span class="preprocessor">.fs</span>-<span class="number">2</span> {
-  font-size: <span class="number">13</span>px<span class="comment">;</span>
-}
-<span class="preprocessor">.fs</span>-<span class="number">3</span> {
-  font-size: <span class="number">21</span>px<span class="comment">;</span>
-}
-<span class="preprocessor">.fs</span>-<span class="number">4</span> {
-  font-size: <span class="number">34</span>px<span class="comment">;</span>
-}
-<span class="preprocessor">.fs</span>-<span class="number">5</span> {
-  font-size: <span class="number">55</span>px<span class="comment">;</span>
-}
-
-// Creating classes for the width property with custom class names <span class="keyword">and</span> custom unit.
-
-<span class="preprocessor">.make</span>-fibo-for( @how-many:<span class="number">5</span> , @starting-term:<span class="number">6</span> , @unit:<span class="string">'%'</span>, @property : width, @class-name : mygrid)<span class="comment">;</span>
-
-<span class="preprocessor">.mygrid</span>-<span class="number">1</span> {
-  width: <span class="number">8</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.mygrid</span>-<span class="number">2</span> {
-  width: <span class="number">13</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.mygrid</span>-<span class="number">3</span> {
-  width: <span class="number">21</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.mygrid</span>-<span class="number">4</span> {
-  width: <span class="number">34</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.mygrid</span>-<span class="number">5</span> {
-  width: <span class="number">55</span>%<span class="comment">;</span>
-}
-
-// using custom selectors
-<span class="preprocessor">.make</span>-fibo-for( @how-many:<span class="number">5</span> , @starting-term:<span class="number">6</span> , @unit:<span class="string">'%'</span>, @property : width, @class-name : ~<span class="string">"gs .fs-"</span>)<span class="comment">;</span>
-//-&gt;
-<span class="preprocessor">.gs</span> <span class="preprocessor">.fs</span>-<span class="number">1</span> {
-  width: <span class="number">8</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.gs</span> <span class="preprocessor">.fs</span>-<span class="number">2</span> {
-  width: <span class="number">13</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.gs</span> <span class="preprocessor">.fs</span>-<span class="number">3</span> {
-  width: <span class="number">21</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.gs</span> <span class="preprocessor">.fs</span>-<span class="number">4</span> {
-  width: <span class="number">34</span>%<span class="comment">;</span>
-}
-<span class="preprocessor">.gs</span> <span class="preprocessor">.fs</span>-<span class="number">5</span> {
-  width: <span class="number">55</span>%<span class="comment">;</span>
-}</code></pre>
-<!-- End ../../../../Desktop/less-sample/app/app-mixins.less -->
-
-
-
-
-<!-- Start ../../sassmin/functions/_low-level.scss -->
-
-<h2 id="-value-"><code>ø($value)</code></h2>
+<p>  Just do <code>hdstream theme</code> and it will take you through the process.</p>
+<h2 id="-hdstream-test-"><code>hdstream test</code></h2>
 <h3 id="description">Description</h3>
-<p>Converts input to zero or zero[unit]</p>
+<p>Used for responsive/cross-browser testing</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream test</code> and then the prompt will take you through the process:</p>
+<pre><code>    <span class="number">0.</span> Select <span class="keyword">the</span> type <span class="keyword">of</span> test <span class="keyword">that</span> you want <span class="keyword">to</span> do
+    <span class="number">1.</span> Specify <span class="keyword">the</span> base url <span class="keyword">of</span> <span class="keyword">the</span> site: eg. http://markle.org
+    <span class="number">2.</span> Specify <span class="keyword">the</span> <span class="keyword">end</span> paths separated <span class="keyword">by</span> commas: <span class="keyword">about</span>.php, impact.php
+    <span class="number">3.</span> Specify <span class="keyword">the</span> viewports <span class="keyword">that</span> you want <span class="keyword">to</span> take <span class="keyword">the</span> snapshots <span class="keyword">of</span> separated <span class="keyword">by</span> commas: <span class="number">200</span>, <span class="number">300</span>, <span class="number">400</span></code></pre>
+<h2 id="-hdstream-t-k-test-type-s-settings-file-"><code>hdstream t -k &lt;test type&gt; -s &lt;settings-file&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Used to do responsive or cross browser testing without prompt</p>
 <h3 id="parameters-">Parameters:</h3>
 <ol>
-<li><strong>$value</strong> : <em>non-string or number</em> The value to be turned to zero or zero[units]. If the input has units, it will be carried over.</li>
+<li><strong>k</strong> : <em>string</em> (required) Type of test. Possible options are: responsive(r), cross_browser(c)</li>
+<li><p><strong>s</strong> : <em>string</em> The path to the settings.json file that has the options. Below is an example of the json settings file:</p>
+<pre><code> {
+     "<span class="attribute">baseUrl</span>" : <span class="value"><span class="string">"http://markle.local.com"</span></span>,
+     "<span class="attribute">paths</span>": <span class="value">[<span class="string">"mkl-impact.php"</span>, <span class="string">"mkl-about.php"</span>]</span>,
+     "<span class="attribute">viewports</span>" : <span class="value">[<span class="number">400</span>, <span class="number">500</span>]
+ }</span></code></pre>
+</li>
 </ol>
-<h3 id="usage">Usage</h3>
-<p>  Can be called anywhere as a function in your sass.</p>
-<h3 id="examples">Examples</h3>
-<pre><code><span class="class">.example1</span> <span class="rules">{
-  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> ø(<span class="number">2</span>px) // -&gt; font-size: <span class="number">0</span>px;</span></span>
-<span class="rule">}</span></span>
-
-<span class="class">.example2</span> <span class="rules">{
-  <span class="rule"><span class="attribute">border</span>:<span class="value"> ø(<span class="number">0</span>) // -&gt; font-size: <span class="number">0</span>;</span></span>
-<span class="rule">}</span></span></code></pre>
-<h2 id="-value-"><code>µ($value)</code></h2>
+<h2 id="-hdstream-help-"><code>hdstream help</code></h2>
 <h3 id="description">Description</h3>
-<p>Converts to one or one[unit]</p>
-<h3 id="parameters-">Parameters:</h3>
-<ol>
-<li><strong>$value</strong> : <em>non-string or number</em> The value to be turned to one or one[units]. If the input has units, it will be carried over.</li>
-</ol>
+<p>Prints a summary of options and commands that are available.</p>
 <h3 id="usage">Usage</h3>
-<p>  Can be called anywhere as a function in your sass.</p>
-<h3 id="examples">Examples</h3>
-<pre><code><span class="class">.example1</span> <span class="rules">{
-  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> µ(<span class="number">2</span>) // -&gt; font-size: <span class="number">1</span>;</span></span>
-<span class="rule">}</span></span>
-
-<span class="class">.example2</span> <span class="rules">{
-  <span class="rule"><span class="attribute">border</span>:<span class="value"> µ(<span class="number">2</span>px) // -&gt; font-size: <span class="number">1</span>px;</span></span>
-<span class="rule">}</span></span></code></pre>
-<!-- End ../../sassmin/functions/_low-level.scss -->
-
-
-
-
-<!-- Start ../../sassmin/functions/_math.scss -->
-
-<h2 id="-power-base-exponent-"><code>power($base, $exponent)</code></h2>
-<!-- End ../../sassmin/functions/_math.scss -->
-
-
-
-
-<!-- Start ../../sassmin/functions/_utils.scss -->
-
-<h2 id="-strip-value-"><code>strip($value)</code></h2>
+<p>  Just do <code>hdstream help</code></p>
+<h2 id="-hdstream-docs-"><code>hdstream docs</code></h2>
 <h3 id="description">Description</h3>
-<p>Remove units or non-string elements immediately followed by numbers.</p>
-<h3 id="parameters-">Parameters:</h3>
-<ol>
-<li><strong>$value</strong> : <em>number[unit]</em> The input with or without unit to be stripped.</li>
-</ol>
+<p>Prints a more detailed documentation for all the tasks and options that are available.</p>
 <h3 id="usage">Usage</h3>
-<p>  Can be called anywhere as a function in your sass. Useful when you need to strip off stuff that are immediately followed after a number.</p>
-<h3 id="examples">Examples</h3>
-<pre><code><span class="class">.example1</span> <span class="rules">{
-  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="function">strip(<span class="number">2</span>)</span> // -&gt; font-size: <span class="number">2</span>;</span></span>
-<span class="rule">}</span></span>
+<p>  Just do <code>hdstream docs</code></p>
+<h2 id="-hdstream-docsfor-command-name-"><code>hdstream docsfor &lt;command-name&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Prints the docs for a given command.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream docsfor nameofcommand</code></p>
+<h2 id="-hdstream-scaffold-arg-params-"><code>hdstream scaffold &lt;arg&gt; &lt;params...&gt;</code></h2>
+<h3 id="description">Description</h3>
+<p>Example for a task that uses all the possible options and keywords. You can refer to this as an example to remember what the possible options are.</p>
+<h3 id="usage">Usage</h3>
+<p>  Just do <code>hdstream scaffold</code></p>
+<h2 id="-hdstream-invalidcommand-"><code>hdstream invalidcommand</code></h2>
+<h3 id="description">Description</h3>
+<p>Catches invalid commands. Prints help if the command entered is not valid.</p>
+<!-- End ../src/hdmade.js -->
 
-<span class="class">.example2</span> <span class="rules">{
-  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="function">strip(<span class="number">2</span>px)</span> // -&gt; font-size: <span class="number">2</span>;</span></span>
-<span class="rule">}</span></span>
 
-<span class="class">.example3</span> <span class="rules">{
-  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="function">strip(<span class="number">3</span>something)</span> // -&gt; font-size: <span class="number">3</span>;</span></span>
-<span class="rule">}</span></span></code></pre>
-<!-- End ../../sassmin/functions/_utils.scss -->
+
+
+<!-- Start ../src/lib/hdlogger.js -->
+
+<ul>
+<li><p>Author: Amin Meyghani</p>
+<ul>
+<li>Date: 09/29/2014</li>
+<li><p>Description: Helper for logging to the console.</p>
+<h3 id="modules">Modules</h3>
+</li>
+</ul>
+</li>
+<li><strong>colors</strong>: add colors to the console output.</li>
+<li><strong>chalk</strong>: pretty printing to the console.</li>
+</ul>
+<!-- End ../src/lib/hdlogger.js -->
+
+
+
+
+<!-- Start ../src/lib/hdserver.js -->
+
+<p>Author: Amin Meyghani
+    Date: 09/30/2014
+    Description: 
+        Simple web server for running tests or taking screenshots.</p>
+<p>Useful for logging information:
+            server.address()
+            server.address().address
+            server.address().port</p>
+<!-- End ../src/lib/hdserver.js -->
 
 
